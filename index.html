@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flixy - Estilo Netflix</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center; /* Centrar horizontalmente */
+            align-items: center; /* Centrar verticalmente */
+            flex-direction: column; /* Organizar elementos en columna */
+            height: 100vh; /* Altura completa de la ventana */
+            position: relative; /* Necesario para el pseudo-elemento */
+            overflow: hidden; /* Evitar desbordamiento */
+        }
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.pexels.com/photos/7991582/pexels-photo-7991582.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+            background-size: cover; /* Cubrir toda la pantalla */
+            background-position: center; /* Centrar la imagen */
+            z-index: -1; /* Colocar detrás del contenido */
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.568), rgb(0, 0, 0)); /* Degradado estilo Netflix */
+            z-index: 0; /* Debajo del contenido */
+        }
+        header {
+            background-color: rgba(0, 0, 0, 0.63); /* Fondo oscuro */
+            color: white;
+            padding: 1px 0;
+            position: absolute; /* Permite que el menú flote sobre el contenido */
+            width: 100%;
+            top: 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* Sombra en el menú */
+        }
+        nav {
+            display: flex;
+            justify-content: center; /* Centrar el menú */
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 15px 25px; /* Espaciado lateral */
+            font-weight: bold; /* Texto en negrita */
+            transition: background-color 0.3s; /* Transición suave */
+        }
+        nav a:hover {
+            background-color: rgba(255, 0, 0, 0.7); /* Color rojo al pasar el ratón */
+        }
+        .content {
+            text-align: center;
+            backdrop-filter: blur(0px); /* Efecto de vidrio esmerilado */
+            border-radius: 10px; /* Bordes redondeados */
+            padding: 20px; /* Espaciado interno */
+            margin-top: 80px; /* Espacio superior */
+            color: white; /* Color de texto blanco */
+        }
+        .logo {
+        max-width: 150px; /* Ajustar el tamaño máximo del logo */
+        width: 100%; /* Hacerlo responsive */
+    }
+    .description {
+        margin: 30px 15%; /* Margen alrededor de la descripción, 15% a los lados */
+        padding: 0; /* Sin espaciado interno */
+        font-size: 14px; /* Reducir el tamaño de fuente */
+        line-height: 1.4; /* Espaciado entre líneas para mejor legibilidad */
+    }
+        .button {
+            background-color: #e50914; /* Color del botón estilo Netflix */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px; /* Bordes redondeados */
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block; /* Asegura que el botón se comporte como un bloque en línea */
+            font-size: 16px; /* Tamaño de fuente */
+            font-weight: bold; /* Texto en negrita */
+            transition: background-color 0.3s; /* Transición suave */
+        }
+        .button:hover {
+            background-color: #f40612; /* Color al pasar el ratón */
+        }
+        /* Estilos para la modal */
+        .modal {
+            display: none; /* Ocultamos la modal por defecto */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            
+            padding-top: 60px;
+        }
+        .modal-content {
+            backdrop-filter: blur(10px); /* Efecto de vidrio esmerilado */
+            background-color: #ffffff07; /* Fondo oscuro */
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #ff0000;
+            width: 80%;
+            max-width: 300px;
+            text-align: center;
+            border-radius: 10px; /* Bordes redondeados */
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: white; /* Color blanco al pasar el ratón */
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .social-icon {
+            width: 40px;
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        h2 {
+        color: white;
+    }
+        
+    </style>
+</head>
+<body>
+
+<div class="background"></div>
+<div class="overlay"></div>
+
+<header>
+    <nav>
+        <a href="https://portal.flixy.uno/inicio">Version anterior </a>
+        <a href="#redes" id="openModal">Redes</a>
+        <a href="#descargas" id="openDownloadModal">Descargas</a>
+    </nav>
+</header>
+
+<div class="content">
+    <img src="https://portal.flixy.uno/img/loguito-fotor-202408210233.png" alt="Logo" class="logo">
+    <div class="description">
+        <p>Flixy es una plataforma que agrega y organiza un amplio catálogo de películas y series de diversas plataformas<br>
+            de streaming, facilitando la búsqueda y comparación de contenido. 
+            Aunque su interfaz no está optimizada para  <br>
+            dispositivos móviles, ofrece una experiencia para los usuarios que buscan descubrir y acceder a sus programas favoritos desde múltiples servicios en un solo lugar.</p>
+
+            <p> © 2024 derechos reservados.</p>
+    </div>
+    <a href="Peliculas.html" class="button" >Ir a Flixy</a>
+    
+</div>
+
+<!-- Modal para Redes Sociales -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="closeModal">&times;</span>
+        <h2>Redes Sociales</h2>
+        <a href="https://t.me/flixy_peliculas" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Telegram_2019_Logo.svg/2048px-Telegram_2019_Logo.svg.png" alt="Telegram" class="social-icon">
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=61556337333658&mibextid=ZbWKwL" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" class="social-icon">
+        </a>
+    </div>
+</div>
+
+<!-- Modal para Descargas -->
+<div id="downloadModal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="closeDownloadModal">&times;</span>
+        <h2>Descargas</h2>
+        <a href="https://www.mediafire.com/file/z0dsiux9y7xvzpk/Flixy.apk/file" target="_blank">
+            <img src="https://w7.pngwing.com/pngs/638/295/png-transparent-android-software-development-logo-android-text-grass-desktop-wallpaper.png" alt="Android" class="social-icon" style="width: 60px;">
+        </a>
+        
+    </div>
+</div>
+
+<script>
+    // Obtener modales
+    var modal = document.getElementById("myModal");
+    var downloadModal = document.getElementById("downloadModal");
+
+    // Obtener el enlace que abre la modal de redes
+    var btn = document.getElementById("openModal");
+    // Obtener el enlace que abre la modal de descargas
+    var downloadBtn = document.getElementById("openDownloadModal");
+
+    // Obtener los elementos <span> que cierran las modales
+    var span = document.getElementsByClassName("close");
+
+    // Cuando el usuario hace clic en el enlace de redes, abrir la modal
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    // Cuando el usuario hace clic en el enlace de descargas, abrir la modal
+    downloadBtn.onclick = function() {
+        downloadModal.style.display = "block";
+    }
+
+    // Cerrar modales al hacer clic en <span> (x)
+    for (let i = 0; i < span.length; i++) {
+        span[i].onclick = function() {
+            modal.style.display = "none";
+            downloadModal.style.display = "none";
+        }
+    }
+
+    // Cerrar modales al hacer clic en cualquier parte fuera de la modal
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        } else if (event.target == downloadModal) {
+            downloadModal.style.display = "none";
+        }
+    }
+</script>
+
+</body>
+</html>
